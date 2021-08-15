@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyWeb", "PharmacyWeb.csproj", "{FD5DA1A3-F0C2-466C-9BCE-FDB36B5333C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyBLL", "..\PharmacyBLL\PharmacyBLL.csproj", "{EF1A9A50-5B7C-472B-8561-25D139630FC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FD5DA1A3-F0C2-466C-9BCE-FDB36B5333C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD5DA1A3-F0C2-466C-9BCE-FDB36B5333C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD5DA1A3-F0C2-466C-9BCE-FDB36B5333C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF1A9A50-5B7C-472B-8561-25D139630FC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF1A9A50-5B7C-472B-8561-25D139630FC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF1A9A50-5B7C-472B-8561-25D139630FC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF1A9A50-5B7C-472B-8561-25D139630FC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
