@@ -20,5 +20,7 @@ namespace PharmacyDAL.Entities
         public Guid TypeId { get; set; }
 
         public ProductType Type { get; set; }
+
+        public IEnumerable<Pharmacy> Pharmacies { get; set; }
     }
 }
