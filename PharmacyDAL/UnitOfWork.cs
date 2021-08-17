@@ -9,13 +9,21 @@ namespace PharmacyDAL
     {
         private PharmacyContext _ctx = new PharmacyContext();
         private IRepository<Product> productRepository;
-
+        private IRepository<Pharmacy> pharmacyRepository;
 
         public IRepository<Product> Products
         {
             get
             {
                 return productRepository == null ? new ProductRepository(_ctx) : productRepository;
+            }
+        }
+
+        public IRepository<Pharmacy> Pharmacies
+        {
+            get
+            {
+                return pharmacyRepository == null ? new PharmacyRepository(_ctx) : pharmacyRepository;
             }
         }
 
