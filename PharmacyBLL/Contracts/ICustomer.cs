@@ -8,5 +8,8 @@ namespace PharmacyBLL.Contructs
     {
         IEnumerable<ProductDTO> GetProducts();
         ProductDTO GetProduct(Guid id);
+        IEnumerable<PharmacyDTO> GetPharmacies();
+        PharmacyDTO GetPharmacy(Guid id);
+
     }
 }
