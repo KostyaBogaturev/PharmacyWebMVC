@@ -1,0 +1,12 @@
+﻿@model List<ProductViewModel>
+@{
+    ViewData["Title"] = "Products";
+}
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>@item.Id @item.Name</li>
+    }
+</ul>
+<hr />
+<a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="CreateProduct">CreateProduct</a>
