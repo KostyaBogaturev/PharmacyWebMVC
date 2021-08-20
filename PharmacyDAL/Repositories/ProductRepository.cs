@@ -16,7 +16,11 @@ namespace PharmacyDAL.Repositories
             _ctx = context;
         }
 
-        public void Create(Product item) => _ctx.Products.Add(item);
+        public void Create(Product item)
+        {
+            _ctx.Products.Add(item);
+            _ctx.SaveChanges();
+        }
 
         public void Delete(Guid id)
         {

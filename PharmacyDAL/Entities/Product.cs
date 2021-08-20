@@ -17,7 +17,7 @@ namespace PharmacyDAL.Entities
 
         public string Image { get; set; }
 
-        public Guid TypeId { get; set; }
+        public Guid? TypeId { get; set; }
 
         public ProductType Type { get; set; }
 

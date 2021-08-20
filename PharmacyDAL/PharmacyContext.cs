@@ -23,7 +23,7 @@ namespace PharmacyDAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=.;Database=PharmacyDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=.;Database=PharmacyDB;Trusted_Connection=True;Integrated Security=True");
         }
     }
 }

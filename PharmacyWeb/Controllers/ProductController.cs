@@ -17,9 +17,12 @@ namespace PharmacyWeb.Controllers
         public IActionResult Index()
         {
             administratorService = new AdministratorService();
+            var model = new ProductViewModel() { Name = "Some product", Firm = "Some Firm" };
+            var dtoModel = mapper.Map<ProductViewModel, ProductDTO>(model);
+            administratorService.Create(dtoModel);
             administratorService.GetProducts();
             IEnumerable<ProductDTO> productsDTO = administratorService.GetProducts();
-            var products = mapper.Map<IEnumerable<ProductDTO>, IEnumerable<ProductViewModel>>(productsDTO);
+            var products = mapper.Map<IEnumerable<ProductDTO>, List<ProductViewModel>>(productsDTO);
             return View(products);
         }
     }
