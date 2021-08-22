@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace PharmacyBLL.DTO
+﻿namespace PharmacyBLL.DTO
 {
-    public class RoleDTO
+    public enum RoleDTO
     {
-        public Guid Id { get; set; }
-
-        public string Name { get; set; }
-
-        public IEnumerable<UserDTO> Users { get; set; }
+        Customer,
+        Admin
     }
 }

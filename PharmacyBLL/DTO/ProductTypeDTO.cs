@@ -10,6 +10,5 @@ namespace PharmacyBLL.DTO
 
         public string Name { get; set; }
 
-        public IEnumerable<ProductDTO> Products { get; set; }
     }
 }
