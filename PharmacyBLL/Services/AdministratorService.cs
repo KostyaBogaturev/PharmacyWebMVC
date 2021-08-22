@@ -22,7 +22,7 @@ namespace PharmacyBLL.Services
         public IEnumerable<ProductDTO> GetProducts()
         {
             IEnumerable<Product> productsDB = DataBase.Products.GetAll();
-            List<ProductDTO> result = mapper.Map<IEnumerable<Product>, List<ProductDTO>>(productsDB);
+            List<ProductDTO> result = mapper.Map<List<ProductDTO>>(productsDB);
             return result;
 
         }

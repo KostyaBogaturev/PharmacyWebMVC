@@ -12,7 +12,6 @@ namespace PharmacyWeb
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<ProductViewModel, ProductDTO>().ReverseMap();
-                cfg.CreateMap<IEnumerable<ProductDTO>, List<ProductViewModel>>();
             });
 
             IMapper mapper = config.CreateMapper();
