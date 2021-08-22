@@ -12,13 +12,12 @@ namespace PharmacyWeb.Controllers
 {
     public class ProductController : Controller
     {
-        private AdministratorService administratorService;
         private IMapper mapper = AutoMapperConfig.GetMapper();
 
         public IActionResult Index()
         {
-            administratorService = new AdministratorService();
-            IEnumerable<ProductDTO> productsDTO = administratorService.GetProducts();
+            var administratorService = new AdministratorService<ProductDTO>();
+            IEnumerable<ProductDTO> productsDTO = administratorService.GetItems();
             var products = mapper.Map<List<ProductViewModel>>(productsDTO);
             return View(products);
         }
@@ -34,7 +33,7 @@ namespace PharmacyWeb.Controllers
         {
             if(product != null)
             {
-                administratorService = new AdministratorService();
+                var administratorService = new AdministratorService<ProductDTO>();
                 var productDTO = mapper.Map<ProductDTO>(product);
                 administratorService.Create(productDTO);
                 return Redirect("Index");
