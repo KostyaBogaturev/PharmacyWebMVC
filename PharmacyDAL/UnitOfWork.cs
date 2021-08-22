@@ -10,6 +10,7 @@ namespace PharmacyDAL
         private PharmacyContext _ctx = new PharmacyContext();
         private IRepository<Product> productRepository;
         private IRepository<Pharmacy> pharmacyRepository;
+        private IRepository<ProductType> productTypesRepository;
 
         public IRepository<Product> Products
         {
@@ -24,6 +25,14 @@ namespace PharmacyDAL
             get
             {
                 return pharmacyRepository == null ? new PharmacyRepository(_ctx) : pharmacyRepository;
+            }
+        }
+
+        public IRepository<ProductType> Types
+        {
+            get
+            {
+                return productTypesRepository == null ? new ProductTypeRepository(_ctx) : productTypesRepository;
             }
         }
 
