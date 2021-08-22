@@ -12,6 +12,7 @@ namespace PharmacyBLL
             {
                 cfg.CreateMap<Product, ProductDTO>().ReverseMap();
                 cfg.CreateMap<Pharmacy, PharmacyDTO>().ReverseMap();
+                cfg.CreateMap<ProductTypeDTO, ProductType>().ReverseMap();
             });
 
             IMapper mapper = config.CreateMapper();
