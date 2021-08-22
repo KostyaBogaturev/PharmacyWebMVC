@@ -1,12 +1,16 @@
 ﻿@model IEnumerable<ProductViewModel>
 
 <p>Start of list</p>
-<ul>
+<div class="row">
     @foreach (var item in Model)
     {
-        <li>@item.Id @item.Name</li>
+    <div class="col-4"style="border:solid">
+        <img src="@item.Image" alt="image" />
+        <p>@item.Name</p>
+
+    </div>
     }
-</ul>
+</div>
 <p>End of list</p>
 
 <a asp-controller="Product" asp-action="CreateProduct">Create</a>
