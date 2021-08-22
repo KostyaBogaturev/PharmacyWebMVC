@@ -8,7 +8,8 @@ using System.Collections.Generic;
 
 namespace PharmacyBLL.Services
 {
-    public class CustomerService : ICustomer
+    public class CustomerService<T> : ICustomer<T>
+        where T:class
     {
         private UnitOfWork DataBase { get; set; }
         private IMapper mapper = AutoMapperConfig.GetMapper();
@@ -17,34 +18,50 @@ namespace PharmacyBLL.Services
         {
             DataBase = new UnitOfWork();
         }
-
-        public IEnumerable<ProductDTO> GetProducts()
+        public IEnumerable<T> GetItems()
         {
-            IEnumerable<Product> productsDB = DataBase.Products.GetAll();
-            List<ProductDTO> result = mapper.Map<IEnumerable<Product>, List<ProductDTO>>(productsDB);
-            return result;
-
+            if (typeof(T) == typeof(ProductDTO))
+            {
+                IEnumerable<Product> productsDB = DataBase.Products.GetAll();
+                List<ProductDTO> result = mapper.Map<List<ProductDTO>>(productsDB);
+                return result as IEnumerable<T>;
+            }
+            else if (typeof(T) == typeof(PharmacyDTO))
+            {
+                IEnumerable<Pharmacy> pharmasiesDB = DataBase.Pharmacies.GetAll();
+                List<PharmacyDTO> result = mapper.Map<List<PharmacyDTO>>(pharmasiesDB);
+                return result as IEnumerable<T>;
+            }
+            else if (typeof(T) == typeof(ProductTypeDTO))
+            {
+                IEnumerable<ProductType> types = DataBase.Types.GetAll();
+                List<ProductTypeDTO> result = mapper.Map<List<ProductTypeDTO>>(types);
+                return result as IEnumerable<T>;
+            }
+            throw new Exception("inappropriate data type");
         }
 
-        public ProductDTO GetProduct(Guid id)
+        public T GetItem(Guid id)
         {
-            Product productDB = DataBase.Products.Get(id);
-            ProductDTO result = mapper.Map<Product, ProductDTO>(productDB);
-            return result;
-        }
-
-        public IEnumerable<PharmacyDTO> GetPharmacies()
-        {
-            IEnumerable<Pharmacy> productsDB = DataBase.Pharmacies.GetAll();
-            List<PharmacyDTO> result = mapper.Map<IEnumerable<Pharmacy>, List<PharmacyDTO>>(productsDB);
-            return result;
-        }
-
-        public PharmacyDTO GetPharmacy(Guid id)
-        {
-            Pharmacy productDB = DataBase.Pharmacies.Get(id);
-            PharmacyDTO result = mapper.Map<Pharmacy, PharmacyDTO>(productDB);
-            return result;
+            if (typeof(T) == typeof(ProductDTO))
+            {
+                Product product = DataBase.Products.Get(id);
+                ProductDTO result = mapper.Map<ProductDTO>(product);
+                return result as T;
+            }
+            else if (typeof(T) == typeof(PharmacyDTO))
+            {
+                Pharmacy pharmasy = DataBase.Pharmacies.Get(id);
+                PharmacyDTO result = mapper.Map<PharmacyDTO>(pharmasy);
+                return result as T;
+            }
+            else if (typeof(T) == typeof(ProductTypeDTO))
+            {
+                ProductType type = DataBase.Types.Get(id);
+                ProductTypeDTO result = mapper.Map<ProductTypeDTO>(type);
+                return result as T;
+            }
+            throw new Exception("inappropriate data type");
         }
     }
 }

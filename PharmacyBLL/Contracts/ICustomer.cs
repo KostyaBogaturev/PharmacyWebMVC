@@ -1,15 +1,12 @@
-﻿using PharmacyBLL.DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace PharmacyBLL.Contructs
 {
-    public interface ICustomer
+    public interface ICustomer<T>
     {
-        IEnumerable<ProductDTO> GetProducts();
-        ProductDTO GetProduct(Guid id);
-        IEnumerable<PharmacyDTO> GetPharmacies();
-        PharmacyDTO GetPharmacy(Guid id);
+        IEnumerable<T> GetItems();
+        T GetItem(Guid id);
 
     }
 }

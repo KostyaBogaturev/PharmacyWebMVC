@@ -19,37 +19,6 @@ namespace PharmacyBLL.Services
             DataBase = new UnitOfWork();
         }
 
-        public IEnumerable<ProductDTO> GetProducts()
-        {
-            IEnumerable<Product> productsDB = DataBase.Products.GetAll();
-            List<ProductDTO> result = mapper.Map<List<ProductDTO>>(productsDB);
-            return result;
-
-        }
-
-        public ProductDTO GetProduct(Guid id)
-        {
-            Product productDB = DataBase.Products.Get(id);
-            ProductDTO result = mapper.Map<Product, ProductDTO>(productDB);
-            return result;
-        }
-
-        public void Update(ProductDTO product)
-        {
-            Product result = mapper.Map<ProductDTO, Product>(product);
-            DataBase.Products.Update(result);
-        }
-        public void Create(ProductDTO product)
-        {
-            Product result = mapper.Map<ProductDTO, Product>(product);
-            DataBase.Products.Create(result);
-        } 
-        public void DeleteProduct(ProductDTO product)
-        {
-            DataBase.Products.Delete(product.Id);
-
-        }
-
         public IEnumerable<T> GetItems()
         {
             if (typeof(T) == typeof(ProductDTO))
