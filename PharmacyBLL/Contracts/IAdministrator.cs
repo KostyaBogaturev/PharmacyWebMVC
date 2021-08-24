@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PharmacyBLL.Contracts
 {
     public interface IAdministrator<T>
     {
-        IEnumerable<T> GetItems();
-        T GetItem(Guid id);
-        void Update(T item);
-        void Create(T item);
-        void Delete(Guid id);
+        Task<IEnumerable<T>> GetItemsAsync();
+        Task<T> GetItemAsync(Guid id);
+        Task UpdateAsync(T item);
+        Task CreateAsync(T item);
+        Task DeleteAsync(Guid id);
 
     }
 }

@@ -5,6 +5,7 @@ using PharmacyDAL;
 using PharmacyDAL.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PharmacyBLL.Services
 {
@@ -18,46 +19,46 @@ namespace PharmacyBLL.Services
         {
             DataBase = new UnitOfWork();
         }
-        public IEnumerable<T> GetItems()
+        public async Task<IEnumerable<T>> GetItemsAsync()
         {
             if (typeof(T) == typeof(ProductDTO))
             {
-                IEnumerable<Product> productsDB = DataBase.Products.GetAll();
+                IEnumerable<Product> productsDB = await DataBase.Products.GetAllAsync();
                 List<ProductDTO> result = mapper.Map<List<ProductDTO>>(productsDB);
                 return result as IEnumerable<T>;
             }
             else if (typeof(T) == typeof(PharmacyDTO))
             {
-                IEnumerable<Pharmacy> pharmasiesDB = DataBase.Pharmacies.GetAll();
+                IEnumerable<Pharmacy> pharmasiesDB = await DataBase.Pharmacies.GetAllAsync();
                 List<PharmacyDTO> result = mapper.Map<List<PharmacyDTO>>(pharmasiesDB);
                 return result as IEnumerable<T>;
             }
             else if (typeof(T) == typeof(ProductTypeDTO))
             {
-                IEnumerable<ProductType> types = DataBase.Types.GetAll();
+                IEnumerable<ProductType> types = await DataBase.Types.GetAllAsync();
                 List<ProductTypeDTO> result = mapper.Map<List<ProductTypeDTO>>(types);
                 return result as IEnumerable<T>;
             }
             throw new Exception("inappropriate data type");
         }
 
-        public T GetItem(Guid id)
+        public async Task<T> GetItemAsync(Guid id)
         {
             if (typeof(T) == typeof(ProductDTO))
             {
-                Product product = DataBase.Products.Get(id);
+                Product product = await DataBase.Products.GetAsync(id);
                 ProductDTO result = mapper.Map<ProductDTO>(product);
                 return result as T;
             }
             else if (typeof(T) == typeof(PharmacyDTO))
             {
-                Pharmacy pharmasy = DataBase.Pharmacies.Get(id);
+                Pharmacy pharmasy = await DataBase.Pharmacies.GetAsync(id);
                 PharmacyDTO result = mapper.Map<PharmacyDTO>(pharmasy);
                 return result as T;
             }
             else if (typeof(T) == typeof(ProductTypeDTO))
             {
-                ProductType type = DataBase.Types.Get(id);
+                ProductType type = await DataBase.Types.GetAsync(id);
                 ProductTypeDTO result = mapper.Map<ProductTypeDTO>(type);
                 return result as T;
             }

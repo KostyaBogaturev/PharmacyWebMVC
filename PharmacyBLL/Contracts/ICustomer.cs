@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PharmacyBLL.Contructs
 {
     public interface ICustomer<T>
     {
-        IEnumerable<T> GetItems();
-        T GetItem(Guid id);
+        Task<IEnumerable<T>> GetItemsAsync();
+        Task<T> GetItemAsync(Guid id);
 
     }
 }
