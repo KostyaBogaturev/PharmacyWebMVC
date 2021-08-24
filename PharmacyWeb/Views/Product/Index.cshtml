@@ -1,16 +1,21 @@
 ﻿@model IEnumerable<ProductViewModel>
 
-<p>Start of list</p>
+<a asp-controller="Product" asp-action="CreateProduct" class="btn-block">Create</a>
 <div class="row">
-    @foreach (var item in Model)
-    {
-    <div class="col-4"style="border:solid">
-        <img src="@item.Image" alt="image" />
-        <p>@item.Name</p>
-
+    <div class="nav col-2">
+        <p>Here I will create menu </p>
     </div>
-    }
+
+    <div class="col-10 row">
+        @foreach (var item in Model)
+        {
+            <div class="col-4">
+                <img src="../Images/@item.Image" alt="Photo of Prouct" />
+                <p class="text-black-50">@item.Cost грн</p>
+                <p>@item.Name</p>
+                <hr />
+            </div>
+
+        }
+    </div>
 </div>
-<p>End of list</p>
-<img src="../Images/furatsilin-tabl-20mg-20-kievmedpreparat-oao-list-250x250-0eb7.jpg" alt="Fuck" />
-<a asp-controller="Product" asp-action="CreateProduct">Create</a>
