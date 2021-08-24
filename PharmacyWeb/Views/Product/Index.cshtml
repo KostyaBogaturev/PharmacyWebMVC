@@ -13,9 +13,11 @@
                 <img src="../Images/@item.Image" alt="Photo of Prouct" />
                 <p class="text-black-50">@item.Cost грн</p>
                 <p>@item.Name</p>
+                <form asp-controller="Product" asp-action="UpdateProduct">
+                    <a asp-controller="Product" asp-action="UpdateProduct" asp-item="@item" class="btn-block">Update</a>
+                </form>
                 <hr />
             </div>
-
         }
     </div>
 </div>

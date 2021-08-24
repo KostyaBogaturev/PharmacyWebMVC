@@ -31,7 +31,7 @@ namespace PharmacyWeb.Controllers
         [HttpPost]
         public IActionResult CreateProduct(ProductViewModel product)
         {
-            if(product != null)
+            if (product != null)
             {
                 var administratorService = new AdministratorService<ProductDTO>();
                 var productDTO = mapper.Map<ProductDTO>(product);
@@ -40,5 +40,25 @@ namespace PharmacyWeb.Controllers
             }
             return View();
         }
+
+        //Bug:This method does not transfer any correlated data
+        [HttpGet]
+        public IActionResult UpdateProduct(ProductViewModel product)
+        {
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateProductPost(ProductViewModel product)
+        {
+            if (product!=null)
+            {
+                var administratorService = new AdministratorService<ProductDTO>();
+                var productDTO = mapper.Map<ProductDTO>(product);
+                administratorService.Update(productDTO);
+                return Redirect("Index");
+            }
+            return View(product);
+        } 
     }
 }
