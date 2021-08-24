@@ -3,7 +3,7 @@ using PharmacyDAL.Contracts;
 using PharmacyDAL.Entities;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace PharmacyDAL.Repositories
 {
@@ -16,26 +16,29 @@ namespace PharmacyDAL.Repositories
             _ctx = context;
         }
 
-        public void Create(Product item)
+        public async Task CreateAsync(Product item)
         {
-            _ctx.Products.Add(item);
-            _ctx.SaveChanges();
+            await Task.Run(() =>
+            {
+                _ctx.Products.Add(item);
+                _ctx.SaveChanges();
+            });
         }
 
-        public void Delete(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            Product product = _ctx.Products.Find(id);
+            Product product = await GetAsync(id);
             if (product != null)
-                _ctx.Products.Remove(product);
+               await Task.Run(()=> _ctx.Products.Remove(product));
         }
 
-        public Product Get(Guid id) => _ctx.Products.Find(id);
+        public async Task<Product> GetAsync(Guid id) => await Task.Run(()=> _ctx.Products.Find(id));
 
 
-        public IEnumerable<Product> GetAll() => _ctx.Products;
+        public async Task<IEnumerable<Product>> GetAllAsync() => await Task.Run(()=>_ctx.Products);
 
 
-        public void Update(Product item) => _ctx.Entry(item).State = EntityState.Modified;
+        public async Task UpdateAsync(Product item) =>await  Task.Run(()=>_ctx.Entry(item).State = EntityState.Modified);
 
     }
 }

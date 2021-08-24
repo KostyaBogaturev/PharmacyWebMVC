@@ -2,6 +2,7 @@
 using PharmacyDAL.Entities;
 using PharmacyDAL.Repositories;
 using System;
+using System.Threading.Tasks;
 
 namespace PharmacyDAL
 {
@@ -36,10 +37,7 @@ namespace PharmacyDAL
             }
         }
 
-        public void Save()
-        {
-            _ctx.SaveChanges();
-        }
+        public async Task SaveAsync() => await _ctx.SaveChangesAsync();
 
         private bool disposed = false;
 
