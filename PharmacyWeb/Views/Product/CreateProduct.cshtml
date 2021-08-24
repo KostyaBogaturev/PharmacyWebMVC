@@ -4,27 +4,27 @@
     <form asp-controller="Product" asp-action="CreateProduct">
         <div>
             <label asp-for="Name"></label>
-            <input type="text" asp-for="Name"/>
+            <input type="text" asp-for="Name" required/>
         </div>
 
         <div>
             <label asp-for="Firm"></label>
-            <input type="text" asp-for="Firm"/>
+            <input type="text" asp-for="Firm" required/>
         </div>
 
         <div>
             <label asp-for="Cost"></label>
-            <input type="number" asp-for="Cost"/>
+            <input type="number" asp-for="Cost" required/>
         </div>
 
         <div>
             <label asp-for="Count"></label>
-            <input type="number" asp-for="Count"/>
+            <input type="number" asp-for="Count" required/>
         </div>
 
         <div>
             <label asp-for="Image"></label>
-            <input type="text" asp-for="Image"/>
+            <input type="text" accept=".jpg" asp-for="Image" required/>
         </div>
 
         <div>

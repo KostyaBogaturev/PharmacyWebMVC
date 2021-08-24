@@ -13,6 +13,8 @@ namespace PharmacyBLL.Services
     {
         private UnitOfWork DataBase { get; set; }
         private IMapper mapper = AutoMapperConfig.GetMapper();
+        private Type myType = typeof(T);
+        private Type myType2 = typeof(ProductDTO);
 
         public AdministratorService()
         {
@@ -82,14 +84,16 @@ namespace PharmacyBLL.Services
                 ProductType result = mapper.Map<ProductType>(item as ProductTypeDTO);
                 DataBase.Types.Update(result);
             }
-            throw new Exception("inappropriate data type");
+            else
+                throw new Exception("inappropriate data type");
         }
 
         public void Create(T item)
         {
+            Type t = typeof(T);
             if (typeof(T) == typeof(ProductDTO))
             {
-                Product result = mapper.Map<ProductDTO, Product>(item as ProductDTO);
+                Product result = mapper.Map<Product>(item as ProductDTO);
                 DataBase.Products.Create(result);
             }
             else if (typeof(T) == typeof(PharmacyDTO))
@@ -102,7 +106,8 @@ namespace PharmacyBLL.Services
                 ProductType result = mapper.Map<ProductType>(item as ProductTypeDTO);
                 DataBase.Types.Create(result);
             }
-            throw new Exception("inappropriate data type");
+            else
+                throw new Exception("inappropriate data type");
         }
 
         public void Delete(Guid id)
@@ -119,7 +124,8 @@ namespace PharmacyBLL.Services
             {
                 DataBase.Types.Delete(id);
             }
-            throw new Exception("inappropriate data type");
+            else
+                throw new Exception("inappropriate data type");
         }
     }
 }
