@@ -18,11 +18,8 @@ namespace PharmacyDAL.Repositories
 
         public async Task CreateAsync(ProductType item)
         {
-            await Task.Run(() =>
-            {
-                _ctx.ProductTypes.Add(item);
-                _ctx.SaveChanges();
-            });
+            await _ctx.ProductTypes.AddAsync(item);
+            await _ctx.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Guid id)
@@ -32,12 +29,17 @@ namespace PharmacyDAL.Repositories
                 await Task.Run(()=>_ctx.ProductTypes.Remove(type));
         }
 
-        public async Task<ProductType> GetAsync(Guid id) =>await Task.Run(()=> _ctx.ProductTypes.Find(id));
+        public async Task<ProductType> GetAsync(Guid id) =>await _ctx.ProductTypes.FindAsync(id);
 
 
         public async Task<IEnumerable<ProductType>> GetAllAsync() => await Task.Run(()=>_ctx.ProductTypes);
 
 
-        public async Task UpdateAsync(ProductType item) => await Task.Run(()=>_ctx.Entry(item).State = EntityState.Modified);
+        public async Task UpdateAsync(ProductType item)
+        {
+            _ctx.ProductTypes.Update(item);
+            await _ctx.SaveChangesAsync();
+        }
+
     }
 }

@@ -18,11 +18,8 @@ namespace PharmacyDAL.Repositories
 
         public async Task CreateAsync(Pharmacy item)
         {
-            await Task.Run(() =>
-            {
-                _ctx.Pharmacies.Add(item);
-                _ctx.SaveChanges();
-            });
+            await _ctx.Pharmacies.AddAsync(item);
+            await _ctx.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Guid id)
@@ -32,7 +29,7 @@ namespace PharmacyDAL.Repositories
                 await Task.Run(() => _ctx.Pharmacies.Remove(pharmacy));
         }
 
-        public async Task<Pharmacy> GetAsync(Guid id)=> await Task.Run(() => _ctx.Pharmacies.Find(id));
+        public async Task<Pharmacy> GetAsync(Guid id)=> await _ctx.Pharmacies.FindAsync(id);
 
 
         public async Task<IEnumerable<Pharmacy>> GetAllAsync() => await Task.Run(()=>_ctx.Pharmacies);
@@ -40,8 +37,8 @@ namespace PharmacyDAL.Repositories
 
         public async Task UpdateAsync(Pharmacy item)
         {
-
-            await Task.Run(() => _ctx.Entry(item).State = EntityState.Modified);
+            _ctx.Pharmacies.Update(item);
+            await _ctx.SaveChangesAsync();
         }
     }
 }
