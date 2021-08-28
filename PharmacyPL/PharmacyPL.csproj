@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>aspnet-PharmacyWeb-A8859A78-3093-4C67-BF1C-2B0EFA44E1C0</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,24 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.9">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGenerators.Mvc" Version="5.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\PharmacyBLL\PharmacyBLL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\Images\agerp-krem-5-tuba-2g-sperko-ukraina-list-250x250-077f.jpg" />
     <None Include="wwwroot\Images\furatsilin-tabl-20mg-20-kievmedpreparat-oao-list-250x250-0eb7.jpg" />
     <None Include="wwwroot\Images\gerpevir-maz-2-5-tuba-5g-kievmedpreparat-oao-list-250x250-db8d.jpg" />
@@ -45,6 +26,23 @@
     <None Include="wwwroot\Images\nifuroksazid-kaps-20-solution-pharm-tov-dkp-farmatsevticheskaya-fabrika-list-250x250-31f1.jpg" />
     <None Include="wwwroot\Images\nistatin-tabl-p-o-500-000-ed-20-pao-nvts-borschagovskiy-hfz-list-250x250-03f8.jpg" />
     <None Include="wwwroot\Images\tobreks-kap-glaz-0-3-fl-5ml-alkon-kuvror-list-250x250-75b1.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration" Version="5.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PharmacyBLL\PharmacyBLL.csproj" />
   </ItemGroup>
 
 </Project>

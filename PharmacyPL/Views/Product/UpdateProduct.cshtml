@@ -1,0 +1,39 @@
+﻿@using PharmacyWeb.Models;
+@model ProductViewModel
+
+<h2>Create product</h2>
+<form asp-controller="Product" asp-action="UpdateProductPost">
+    <div>
+        <label asp-for="Id">Id</label>
+        <input type="text" asp-for="Id" value="@Model.Id" required />
+    </div>
+    <div>
+        <label asp-for="Name"></label>
+        <input type="text" asp-for="Name" value="@Model.Name" required />
+    </div>
+
+    <div>
+        <label asp-for="Firm"></label>
+        <input type="text" asp-for="Firm" value="@Model.Firm" required />
+    </div>
+
+    <div>
+        <label asp-for="Cost"></label>
+        <input type="number" asp-for="Cost" value="@Model.Cost" required />
+    </div>
+
+    <div>
+        <label asp-for="Count"></label>
+        <input type="number" asp-for="Count" value="@Model.Count" required />
+    </div>
+
+    <div>
+        <label asp-for="Image"></label>
+        <input type="text" accept=".jpg" asp-for="Image" value="@Model.Image" required />
+    </div>
+
+    <div>
+        <input type="submit" value="Update" class="btn" />
+    </div>
+
+</form>
