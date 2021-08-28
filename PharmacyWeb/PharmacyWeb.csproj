@@ -6,6 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Images\agerp-krem-5-tuba-2g-sperko-ukraina-list-250x250-077f.jpg" />
+    <Content Remove="wwwroot\Images\furatsilin-tabl-20mg-20-kievmedpreparat-oao-list-250x250-0eb7.jpg" />
+    <Content Remove="wwwroot\Images\gerpevir-maz-2-5-tuba-5g-kievmedpreparat-oao-list-250x250-db8d.jpg" />
+    <Content Remove="wwwroot\Images\hlorofillipt-r-r-spirt-10mg-ml-fl-100ml-pao-galichfarm-list-250x250-802d.jpg" />
+    <Content Remove="wwwroot\Images\kandibiotik-kap-ush-fl-5ml-glenmark-farmasyutikalz-ltd-list-250x250-cbe2.jpg" />
+    <Content Remove="wwwroot\Images\levomitsetin-r-r-nakozh-spirt-1-fl-25ml-prat-farmats-fabrika-viola-list-250x250-b57a.jpg" />
+    <Content Remove="wwwroot\Images\nifuroksazid-kaps-20-solution-pharm-tov-dkp-farmatsevticheskaya-fabrika-list-250x250-31f1.jpg" />
+    <Content Remove="wwwroot\Images\nistatin-tabl-p-o-500-000-ed-20-pao-nvts-borschagovskiy-hfz-list-250x250-03f8.jpg" />
+    <Content Remove="wwwroot\Images\tobreks-kap-glaz-0-3-fl-5ml-alkon-kuvror-list-250x250-75b1.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.9" />
@@ -19,6 +31,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PharmacyBLL\PharmacyBLL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Images\agerp-krem-5-tuba-2g-sperko-ukraina-list-250x250-077f.jpg" />
+    <None Include="wwwroot\Images\furatsilin-tabl-20mg-20-kievmedpreparat-oao-list-250x250-0eb7.jpg" />
+    <None Include="wwwroot\Images\gerpevir-maz-2-5-tuba-5g-kievmedpreparat-oao-list-250x250-db8d.jpg" />
+    <None Include="wwwroot\Images\hlorofillipt-r-r-spirt-10mg-ml-fl-100ml-pao-galichfarm-list-250x250-802d.jpg" />
+    <None Include="wwwroot\Images\kandibiotik-kap-ush-fl-5ml-glenmark-farmasyutikalz-ltd-list-250x250-cbe2.jpg" />
+    <None Include="wwwroot\Images\levomitsetin-r-r-nakozh-spirt-1-fl-25ml-prat-farmats-fabrika-viola-list-250x250-b57a.jpg" />
+    <None Include="wwwroot\Images\nifuroksazid-kaps-20-solution-pharm-tov-dkp-farmatsevticheskaya-fabrika-list-250x250-31f1.jpg" />
+    <None Include="wwwroot\Images\nistatin-tabl-p-o-500-000-ed-20-pao-nvts-borschagovskiy-hfz-list-250x250-03f8.jpg" />
+    <None Include="wwwroot\Images\tobreks-kap-glaz-0-3-fl-5ml-alkon-kuvror-list-250x250-75b1.jpg" />
   </ItemGroup>
 
 </Project>

@@ -14,12 +14,25 @@ namespace PharmacyWeb.Controllers
     {
         private IMapper mapper = AutoMapperConfig.GetMapper();
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int page=1)
         {
+            int pageSize = 2;
+
             var administratorService = new AdministratorService<ProductDTO>();
-            IEnumerable<ProductDTO> productsDTO = administratorService.GetItems();
+            IEnumerable<ProductDTO> productsDTO =await administratorService.GetItemsAsync();
             var products = mapper.Map<List<ProductViewModel>>(productsDTO);
-            return View(products);
+
+            var count = products.Count();
+            var items = products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            var pageViewModel = new PageViewModel(count, page, pageSize);
+            var productIndexViewModel = new ProductIndexViewModel()
+            {
+                PageViewModel = pageViewModel,
+                Products = items
+            };
+
+            return View(productIndexViewModel);
         }
 
         [HttpGet]
@@ -29,13 +42,13 @@ namespace PharmacyWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateProduct(ProductViewModel product)
+        public async Task<IActionResult> CreateProduct(ProductViewModel product)
         {
             if (product != null)
             {
                 var administratorService = new AdministratorService<ProductDTO>();
                 var productDTO = mapper.Map<ProductDTO>(product);
-                administratorService.Create(productDTO);
+                await administratorService.CreateAsync(productDTO);
                 return Redirect("Index");
             }
             return View();
@@ -43,19 +56,22 @@ namespace PharmacyWeb.Controllers
 
         //Bug:This method does not transfer any correlated data
         [HttpGet]
-        public IActionResult UpdateProduct(ProductViewModel product)
+        public async Task<IActionResult> UpdateProduct(Guid id)
         {
+            var admin = new AdministratorService<ProductDTO>();
+            var productDTO = await admin.GetItemAsync(id);
+            var product =  mapper.Map<ProductViewModel>(productDTO);
             return View(product);
         }
 
         [HttpPost]
-        public IActionResult UpdateProductPost(ProductViewModel product)
+        public async Task<IActionResult> UpdateProductPost(ProductViewModel product)
         {
             if (product!=null)
             {
                 var administratorService = new AdministratorService<ProductDTO>();
                 var productDTO = mapper.Map<ProductDTO>(product);
-                administratorService.Update(productDTO);
+                await administratorService.UpdateAsync(productDTO);
                 return Redirect("Index");
             }
             return View(product);

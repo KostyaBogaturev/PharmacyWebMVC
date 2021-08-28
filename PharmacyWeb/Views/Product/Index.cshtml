@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProductViewModel>
+﻿@model ProductIndexViewModel
 
 <a asp-controller="Product" asp-action="CreateProduct" class="btn-block">Create</a>
 <div class="row">
@@ -7,17 +7,34 @@
     </div>
 
     <div class="col-10 row">
-        @foreach (var item in Model)
+        @foreach (var item in Model.Products)
         {
             <div class="col-4">
-                <img src="../Images/@item.Image" alt="Photo of Prouct" />
+                <img src="/Images/@item.Image" alt="Photo of Prouct" asp-append-version="true" />
                 <p class="text-black-50">@item.Cost грн</p>
-                <p>@item.Name</p>
-                <form asp-controller="Product" asp-action="UpdateProduct">
-                    <a asp-controller="Product" asp-action="UpdateProduct" asp-item="@item" class="btn-block">Update</a>
-                </form>
+                <p>@item.Name</p>               
+                <a asp-action="UpdateProduct" asp-route-id="@item.Id" class="btn btn-outline-dark">Update</a>
                 <hr />
             </div>
         }
     </div>
+  
+    @if (Model.PageViewModel.HasPreviousPage)
+    {
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+           class="btn btn-outline-dark">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Назад
+        </a>
+    }
+    @if (Model.PageViewModel.HasNextPage)
+    {
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+           class="btn btn-outline-dark">
+            Вперед
+            <i class="glyphicon glyphicon-chevron-right"></i>
+        </a>
+    }
 </div>
