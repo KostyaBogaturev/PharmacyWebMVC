@@ -13,12 +13,12 @@ namespace PharmacyWeb.Controllers
     public class ProductController : Controller
     {
         private IMapper mapper = AutoMapperConfig.GetMapper();
+        private AdministratorService<ProductDTO> administratorService = new AdministratorService<ProductDTO>();
 
         public async Task<IActionResult> Index(int page=1)
         {
             int pageSize = 2;
 
-            var administratorService = new AdministratorService<ProductDTO>();
             IEnumerable<ProductDTO> productsDTO =await administratorService.GetItemsAsync();
             var products = mapper.Map<List<ProductViewModel>>(productsDTO);
 
@@ -46,7 +46,6 @@ namespace PharmacyWeb.Controllers
         {
             if (product != null)
             {
-                var administratorService = new AdministratorService<ProductDTO>();
                 var productDTO = mapper.Map<ProductDTO>(product);
                 await administratorService.CreateAsync(productDTO);
                 return Redirect("Index");
@@ -57,8 +56,7 @@ namespace PharmacyWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateProduct(Guid id)
         {
-            var admin = new AdministratorService<ProductDTO>();
-            var productDTO = await admin.GetItemAsync(id);
+            var productDTO = await administratorService.GetItemAsync(id);
             var product =  mapper.Map<ProductViewModel>(productDTO);
             return View(product);
         }
@@ -75,5 +73,12 @@ namespace PharmacyWeb.Controllers
             }
             return View(product);
         } 
+
+        public async Task<IActionResult> GetProduct(Guid id)
+        {
+            var productDTO = await administratorService.GetItemAsync(id);
+            var productView = mapper.Map<ProductViewModel>(productDTO);
+            return View(productView);
+        }
     }
 }

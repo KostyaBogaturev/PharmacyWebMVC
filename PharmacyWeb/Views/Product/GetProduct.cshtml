@@ -1,0 +1,14 @@
+﻿@model ProductViewModel
+
+    <p>@Model.Name</p>
+    <hr />
+    <div class="row">
+        <div class="col-4">
+            <img src="/Images/@Model.Image" alt="Image of produt" />
+        </div>
+        <div class="col-8">
+            <p>@Model.Cost $</p>
+            <p>Manufacturer: @Model.Firm</p>
+            <p>@Model.Count units are currently available</p>
+        </div>
+    </div>
