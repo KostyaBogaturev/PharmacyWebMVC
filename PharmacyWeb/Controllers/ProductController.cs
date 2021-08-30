@@ -54,7 +54,6 @@ namespace PharmacyWeb.Controllers
             return View();
         }
 
-        //Bug:This method does not transfer any correlated data
         [HttpGet]
         public async Task<IActionResult> UpdateProduct(Guid id)
         {

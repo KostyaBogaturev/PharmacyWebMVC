@@ -27,10 +27,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\PharmacyBLL\PharmacyBLL.csproj" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +40,10 @@
     <None Include="wwwroot\Images\nifuroksazid-kaps-20-solution-pharm-tov-dkp-farmatsevticheskaya-fabrika-list-250x250-31f1.jpg" />
     <None Include="wwwroot\Images\nistatin-tabl-p-o-500-000-ed-20-pao-nvts-borschagovskiy-hfz-list-250x250-03f8.jpg" />
     <None Include="wwwroot\Images\tobreks-kap-glaz-0-3-fl-5ml-alkon-kuvror-list-250x250-75b1.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PharmacyBLL\PharmacyBLL.csproj" />
   </ItemGroup>
 
 </Project>
