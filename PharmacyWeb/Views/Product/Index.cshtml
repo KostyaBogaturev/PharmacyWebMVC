@@ -4,12 +4,15 @@
 <a asp-controller="Product" asp-action="CreateProduct" class="btn-block">Create</a>
 <div class="row">
     <div class="nav col-2">
-        <select>
-            <option asp-action="Index" asp-route-sortParams="@SortParamaters.NameAsc">A-Z</option>
-            <option asp-action="Index" asp-route-sortParams="@SortParamaters.NameDesc">Z-A</option>
-            <option asp-action="Index" asp-route-sortParams="@SortParamaters.PriceAsc">Ascending price</option>
-            <option asp-action="Index" asp-route-sortParams="@SortParamaters.PricaDesc">Descending price</option>
-        </select>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sort by
+            </a>
+            <a class="dropdown-item" asp-action="Index" asp-route-sortParams="@SortParamaters.NameAsc">A-Z</a>
+            <a class="dropdown-item" asp-action="Index" asp-route-sortParams="@SortParamaters.NameDesc">Z-A</a>
+            <a class="dropdown-item" asp-action="Index" asp-route-sortParams="@SortParamaters.PriceAsc">Ascending price</a>
+            <a class="dropdown-item" asp-action="Index" asp-route-sortParams="@SortParamaters.PricaDesc">Descending price</a>
+        </div>
     </div>
 
     <div class="col-10 row">
@@ -26,7 +29,7 @@
             </div>
         }
     </div>
-  
+
     @if (Model.PageViewModel.HasPreviousPage)
     {
         <a asp-action="Index"
