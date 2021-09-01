@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PharmacyBLL.DTO;
 using PharmacyBLL.Services;
 using PharmacyWeb.Models;
+using PharmacyWeb.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,15 +16,23 @@ namespace PharmacyWeb.Controllers
         private IMapper mapper = AutoMapperConfig.GetMapper();
         private AdministratorService<ProductDTO> administratorService = new AdministratorService<ProductDTO>();
 
-        public async Task<IActionResult> Index(int page=1)
+        public async Task<IActionResult> Index(int page=1 , SortParamaters sortParams= SortParamaters.NameAsc)
         {
-            int pageSize = 2;
+            int pageSize = 9;
 
             IEnumerable<ProductDTO> productsDTO =await administratorService.GetItemsAsync();
             var products = mapper.Map<List<ProductViewModel>>(productsDTO);
 
             var count = products.Count();
-            var items = products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            var items = products.Skip((page - 1) * pageSize).Take(pageSize);
+            items = sortParams switch
+            {
+                SortParamaters.NameAsc=> items.OrderBy(i => i.Name),
+                SortParamaters.NameDesc => items.OrderByDescending(i => i.Name),
+                SortParamaters.PriceAsc => items.OrderBy(i => i.Cost),
+                SortParamaters.PricaDesc => items.OrderByDescending(i => i.Cost),
+                _ => items.OrderBy(i => i.Name),
+            };
 
             var pageViewModel = new PageViewModel(count, page, pageSize);
             var productIndexViewModel = new ProductIndexViewModel()

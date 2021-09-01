@@ -1,9 +1,15 @@
-﻿@model ProductIndexViewModel
+﻿@using PharmacyWeb.Enums;
+@model ProductIndexViewModel
 
 <a asp-controller="Product" asp-action="CreateProduct" class="btn-block">Create</a>
 <div class="row">
     <div class="nav col-2">
-        <p>Here I will create menu </p>
+        <select>
+            <option asp-action="Index" asp-route-sortParams="@SortParamaters.NameAsc">A-Z</option>
+            <option asp-action="Index" asp-route-sortParams="@SortParamaters.NameDesc">Z-A</option>
+            <option asp-action="Index" asp-route-sortParams="@SortParamaters.PriceAsc">Ascending price</option>
+            <option asp-action="Index" asp-route-sortParams="@SortParamaters.PricaDesc">Descending price</option>
+        </select>
     </div>
 
     <div class="col-10 row">

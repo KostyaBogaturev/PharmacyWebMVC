@@ -2,7 +2,7 @@
 {
     public enum SortParamaters
     {
-        NaneAsc,
+        NameAsc,
         NameDesc,
         PriceAsc,
         PricaDesc
