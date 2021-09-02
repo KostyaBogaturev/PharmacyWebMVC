@@ -17,8 +17,20 @@ namespace PharmacyBLL.DTO
 
         public string Image { get; set; }
 
+        public bool NeedPrescription { get; set; }
+
+        public Guid TypeId { get; set; }
+
         public ProductTypeDTO Type { get; set; }
 
+        public Guid SubtypeId { get; set; }
+
+        public SubtypeDTO Subtype { get; set; }
+
         public IEnumerable<PharmacyDTO> Pharmacies { get; set; }
+
+        public string Instruction { get; set; }
+
+        public IEquatable<ProductDTO> Analogues { get; set; }
     }
 }

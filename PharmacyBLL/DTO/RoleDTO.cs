@@ -1,8 +1,14 @@
-﻿namespace PharmacyBLL.DTO
+﻿using PharmacyDAL.Entities;
+using System;
+
+namespace PharmacyBLL.DTO
 {
-    public enum RoleDTO
+    public class RoleDTO
     {
-        Customer,
-        Admin
+        public Guid Id { get; set; }
+
+        public string Name { get; set; }
+
+        public IEquatable<User> Users { get; set; }
     }
 }
