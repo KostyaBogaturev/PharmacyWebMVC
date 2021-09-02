@@ -29,8 +29,5 @@ namespace PharmacyBLL.DTO
 
         public IEnumerable<PharmacyDTO> Pharmacies { get; set; }
 
-        public string Instruction { get; set; }
-
-        public IEquatable<ProductDTO> Analogues { get; set; }
     }
 }

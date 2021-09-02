@@ -36,5 +36,9 @@ namespace PharmacyDAL.Entities
 
         public IEquatable<Product> Analogues { get; set; }
 
+        public string Feature { get; set; }
+
+        public string Supplement { get; set; }
+
     }
 }
