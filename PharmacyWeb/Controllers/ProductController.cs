@@ -16,7 +16,7 @@ namespace PharmacyWeb.Controllers
         private IMapper mapper = AutoMapperConfig.GetMapper();
         private AdministratorService<ProductDTO> administratorService = new AdministratorService<ProductDTO>();
 
-        public async Task<IActionResult> Index(int page=1 , SortParamaters sortParams= SortParamaters.NameAsc)
+        public async Task<IActionResult> Index(List<string> checkedFirms ,int page=1 , SortParamaters sortParams= SortParamaters.NameAsc )
         {
             int pageSize = 9;
 
@@ -34,11 +34,20 @@ namespace PharmacyWeb.Controllers
                 _ => items.OrderBy(i => i.Name),
             };
 
+            // it's just temp realization of firm-list
+            var firms = new List<string>() { "Bionorica", "Biopharma", "IPSEN", "Sanofi", "STADA" };
+
+            if(checkedFirms == null) 
+            {
+                checkedFirms = new List<string>(firms.Count());
+            }
             var pageViewModel = new PageViewModel(count, page, pageSize);
             var productIndexViewModel = new ProductIndexViewModel()
             {
                 PageViewModel = pageViewModel,
-                Products = items
+                Products = items,
+                Firms = firms,
+                CheckedFirms = checkedFirms
             };
 
             return View(productIndexViewModel);
