@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PharmacyDAL.Contracts;
+﻿using PharmacyDAL.Contracts;
 using PharmacyDAL.Entities;
 using System;
 using System.Collections.Generic;

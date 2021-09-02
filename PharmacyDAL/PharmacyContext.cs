@@ -13,6 +13,10 @@ namespace PharmacyDAL
 
         public DbSet<Subtype> Subtypes { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<Role> Roles { get; set; }
+
         static PharmacyContext()
         {
 
