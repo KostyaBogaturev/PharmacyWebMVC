@@ -32,13 +32,5 @@ namespace PharmacyDAL.Entities
 
         public IEnumerable<Pharmacy> Pharmacies { get; set; }
 
-        public string Instruction { get; set; }
-
-        public IEquatable<Product> Analogues { get; set; }
-
-        public string Feature { get; set; }
-
-        public string Supplement { get; set; }
-
     }
 }

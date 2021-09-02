@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace PharmacyBLL.DTO
+namespace PharmacyDAL.Entities
 {
-    public class MedicineDTO:ProductDTO
+    public class Medicine : Product
     {
         public string Instruction { get; set; }
 
-        public IEquatable<ProductDTO> Analogues { get; set; }
+        public IEquatable<Medicine> Analogues { get; set; }
 
         public string StorageTemperature { get; set; }
 
