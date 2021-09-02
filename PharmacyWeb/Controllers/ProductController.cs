@@ -20,7 +20,7 @@ namespace PharmacyWeb.Controllers
         {
             int pageSize = 9;
 
-            IEnumerable<ProductDTO> productsDTO =await administratorService.GetItemsAsync();
+            IEnumerable<ProductDTO> productsDTO =await administratorService.GetItemsAsync(checkedFirms);
             var products = mapper.Map<List<ProductViewModel>>(productsDTO);
 
             var count = products.Count();
