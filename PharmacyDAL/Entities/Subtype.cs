@@ -2,12 +2,14 @@
 
 namespace PharmacyDAL.Entities
 {
-    public class Role
+    public class Subtype
     {
         public Guid Id { get; set; }
 
         public string Name { get; set; }
 
-        public IEquatable<User> Users { get; set; }
+        public Guid TypeId { get; set; }
+
+        public ProductType Type { get; set; }
     }
 }

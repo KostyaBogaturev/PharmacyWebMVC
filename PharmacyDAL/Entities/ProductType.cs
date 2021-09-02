@@ -8,5 +8,6 @@ namespace PharmacyDAL.Entities
 
         public string Name { get; set; }
 
+        public IEquatable<Subtype> Subtypes { get; set; }
     }
 }

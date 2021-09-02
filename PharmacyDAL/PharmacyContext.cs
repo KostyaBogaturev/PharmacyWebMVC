@@ -11,6 +11,8 @@ namespace PharmacyDAL
 
         public DbSet<ProductType> ProductTypes { get; set; }
 
+        public DbSet<Subtype> Subtypes { get; set; }
+
         static PharmacyContext()
         {
 

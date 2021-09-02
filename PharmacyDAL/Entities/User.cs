@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace PharmacyDAL.Entities
 {
@@ -12,6 +13,9 @@ namespace PharmacyDAL.Entities
 
         public string Address { get; set; }
 
+        public Guid RoleID { get; set; }
+
+        [Required]
         public Role Role { get; set; }
     }
 }

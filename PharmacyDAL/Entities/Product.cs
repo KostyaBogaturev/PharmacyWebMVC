@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PharmacyDAL.Entities
 {
@@ -17,10 +18,23 @@ namespace PharmacyDAL.Entities
 
         public string Image { get; set; }
 
-        public Guid? TypeId { get; set; }
+        public bool NeedPrescription { get; set; }
 
+        public Guid TypeId { get; set; }
+
+        [Required]
         public ProductType Type { get; set; }
 
+        public Guid SubtypeId { get; set; }
+
+        [Required]
+        public Subtype Subtype { get; set; }
+
         public IEnumerable<Pharmacy> Pharmacies { get; set; }
+
+        public string Instruction { get; set; }
+
+        public IEquatable<Product> Analogues { get; set; }
+
     }
 }
