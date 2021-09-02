@@ -12,6 +12,9 @@ namespace PharmacyDAL
         private IRepository<Product> productRepository;
         private IRepository<Pharmacy> pharmacyRepository;
         private IRepository<ProductType> productTypesRepository;
+        private IRepository<Subtype> subtypeRepository;
+        private IRepository<User> userRepository;
+        private IRepository<Role> roleRepository;
 
         public IRepository<Product> Products
         {
@@ -34,6 +37,30 @@ namespace PharmacyDAL
             get
             {
                 return productTypesRepository == null ? new ProductTypeRepository(_ctx) : productTypesRepository;
+            }
+        }
+
+        public IRepository<Subtype> Subtypes
+        {
+            get
+            {
+                return subtypeRepository == null ? new SubtypeRepository(_ctx) : subtypeRepository;
+            }
+        }
+
+        public IRepository<User> Users
+        {
+            get
+            {
+                return userRepository == null ? new UserRepository(_ctx) : userRepository;
+            }
+        }
+
+        public IRepository<Role> Roles
+        {
+            get
+            {
+                return roleRepository == null ? new RoleRepository(_ctx) : roleRepository;
             }
         }
 
