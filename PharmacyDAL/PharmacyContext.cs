@@ -17,6 +17,12 @@ namespace PharmacyDAL
 
         public DbSet<Role> Roles { get; set; }
 
+        public DbSet<Medicine> Medicines { get; set; }
+
+        public DbSet<Beauty> Beauties { get; set; }
+
+        public DbSet<ProductForChild> ProductsForChild { get; set; }
+
         static PharmacyContext()
         {
 
