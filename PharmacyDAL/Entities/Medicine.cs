@@ -4,9 +4,8 @@ namespace PharmacyDAL.Entities
 {
     public class Medicine : Product
     {
-        public string Instruction { get; set; }
 
-        public IEquatable<Medicine> Analogues { get; set; }
+        public string Instruction { get; set; }
 
         public string StorageTemperature { get; set; }
 

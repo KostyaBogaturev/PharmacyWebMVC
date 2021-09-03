@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PharmacyDAL.Entities
 {
@@ -8,6 +9,6 @@ namespace PharmacyDAL.Entities
 
         public string Name { get; set; }
 
-        public IEquatable<User> Users { get; set; }
+        public IEnumerable<User> Users { get; set; }
     }
 }

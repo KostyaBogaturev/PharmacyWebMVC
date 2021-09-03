@@ -8,8 +8,6 @@ namespace PharmacyBLL.DTO
     {
         public string Instruction { get; set; }
 
-        public IEquatable<ProductDTO> Analogues { get; set; }
-
         public string StorageTemperature { get; set; }
 
         public string LightSensitivity { get; set; }

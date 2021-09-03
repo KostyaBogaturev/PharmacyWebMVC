@@ -4,12 +4,11 @@ using PharmacyBLL.DTO;
 using PharmacyDAL;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PharmacyBLL.Services
 {
-    class CatalogueService : ICatalogueService
+    public class CatalogueService : ICatalogueService
     {
         private IMapper mapper;
         private UnitOfWork dataBase;

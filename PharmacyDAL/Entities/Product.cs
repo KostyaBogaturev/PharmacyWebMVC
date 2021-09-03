@@ -25,11 +25,6 @@ namespace PharmacyDAL.Entities
         [Required]
         public ProductType Type { get; set; }
 
-        public Guid SubtypeId { get; set; }
-
-        [Required]
-        public Subtype Subtype { get; set; }
-
         public IEnumerable<Pharmacy> Pharmacies { get; set; }
 
     }

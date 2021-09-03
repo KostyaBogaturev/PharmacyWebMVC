@@ -23,10 +23,6 @@ namespace PharmacyBLL.DTO
 
         public ProductTypeDTO Type { get; set; }
 
-        public Guid SubtypeId { get; set; }
-
-        public SubtypeDTO Subtype { get; set; }
-
         public IEnumerable<PharmacyDTO> Pharmacies { get; set; }
 
     }

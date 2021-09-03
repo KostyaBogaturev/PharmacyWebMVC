@@ -13,14 +13,22 @@ namespace PharmacyWeb.Controllers
 {
     public class ProductController : Controller
     {
-        private IMapper mapper = AutoMapperConfig.GetMapper();
-        private AdministratorService<ProductDTO> administratorService = new AdministratorService<ProductDTO>();
+        private IMapper mapper;
+        private AdministratorService<ProductDTO> administratorService;
+        private CatalogueService catalogueService;
+
+        public ProductController()
+        {
+            mapper = AutoMapperConfig.GetMapper();
+            administratorService = new AdministratorService<ProductDTO>();
+            catalogueService = new CatalogueService();
+        }
 
         public async Task<IActionResult> Index(List<string> checkedFirms ,int page=1 , SortParamaters sortParams= SortParamaters.NameAsc )
         {
             int pageSize = 9;
 
-            IEnumerable<ProductDTO> productsDTO =await administratorService.GetItemsAsync(checkedFirms);
+            IEnumerable<ProductDTO> productsDTO = await catalogueService.GetAllProductsAsync();
             var products = mapper.Map<List<ProductViewModel>>(productsDTO);
 
             var count = products.Count();

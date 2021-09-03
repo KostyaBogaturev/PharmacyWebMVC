@@ -9,7 +9,7 @@ namespace PharmacyBLL.DTO
 
         public string Name { get; set; }
 
-        public IEnumerable<SubtypeDTO> Subtype { get; set; }
+        public IEnumerable<SubtypeDTO> Subtypes { get; set; }
 
     }
 }

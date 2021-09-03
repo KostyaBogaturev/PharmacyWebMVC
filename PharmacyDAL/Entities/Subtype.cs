@@ -8,8 +8,6 @@ namespace PharmacyDAL.Entities
 
         public string Name { get; set; }
 
-        public Guid TypeId { get; set; }
-
         public ProductType Type { get; set; }
     }
 }

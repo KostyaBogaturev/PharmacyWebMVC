@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PharmacyBLL.Services;
 using PharmacyWeb.Models;
 
 namespace PharmacyWeb.Controllers
@@ -20,6 +21,8 @@ namespace PharmacyWeb.Controllers
 
         public IActionResult Index()
         {
+            CatalogueService catalogue = new CatalogueService();
+            catalogue.GetAllProductsAsync();
             return View();
         }
 

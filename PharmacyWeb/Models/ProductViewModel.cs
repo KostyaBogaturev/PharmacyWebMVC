@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PharmacyWeb.Models
 {
@@ -15,5 +16,13 @@ namespace PharmacyWeb.Models
         public int Count { get; set; }
 
         public string Image { get; set; }
+
+        public bool NeedPrescription { get; set; }
+
+        public string Type { get; set; }
+
+        public string Subtype { get; set; }
+
+        public IEnumerable<PharmacyViewModel> Pharmacies { get; set; }
     }
 }

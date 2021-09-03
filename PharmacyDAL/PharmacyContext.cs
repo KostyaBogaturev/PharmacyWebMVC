@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PharmacyDAL.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PharmacyDAL
 {
@@ -23,11 +25,6 @@ namespace PharmacyDAL
 
         public DbSet<ProductForChild> ProductsForChild { get; set; }
 
-        static PharmacyContext()
-        {
-
-        }
-
         public PharmacyContext()
         {
             Database.EnsureCreated();
@@ -35,7 +32,14 @@ namespace PharmacyDAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=.;Database=PharmacyDB;Trusted_Connection=True;Integrated Security=True");
+            optionsBuilder.UseSqlServer("Server=.;Database=PharmacyWebDB;Trusted_Connection=True;Integrated Security=True");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Subtype>()
+                .HasOne(s => s.Type);
+                
         }
     }
 }
