@@ -4,6 +4,7 @@ using PharmacyBLL.DTO;
 using PharmacyDAL;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PharmacyBLL.Services
@@ -44,6 +45,27 @@ namespace PharmacyBLL.Services
         public IEnumerable<ProductDTO> GetDiscountProducts()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<ProductDTO>> GetFilteredProductsAsync(List<string> firms, bool inStockOnly=false)
+        {
+            var products = await GetAllProductsAsync();
+
+            if(inStockOnly)
+            products = products.Where(p => p.Count > 0);
+
+            var result = new List<ProductDTO>();
+            if (products !=null & firms.Any())
+            {
+                foreach (var item in firms)
+                {
+                    var tempStorage = products.Where(p => p.Firm == item);
+                    if (tempStorage != null)
+                        result.AddRange(tempStorage);
+                }
+            }
+
+            return result;
         }
     }
 }
