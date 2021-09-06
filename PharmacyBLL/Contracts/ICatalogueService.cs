@@ -10,6 +10,6 @@ namespace PharmacyBLL.Contracts
         public IEnumerable<MedicineDTO> GetMedicines();
         public IEnumerable<BeautyDTO> GetBeauties();
         public IEnumerable<ProductForChildDTO> GetProductsForChildren();
-        public IEnumerable<ProductDTO> GetDiscountProducts();
+        public Task<IEnumerable<ProductDTO>> GetDiscountProducts();
     }
 }

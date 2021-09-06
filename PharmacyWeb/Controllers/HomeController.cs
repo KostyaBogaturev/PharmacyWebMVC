@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PharmacyBLL.Services;
@@ -13,16 +14,20 @@ namespace PharmacyWeb.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private IMapper mapper;
+        private CatalogueService catalogue;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            mapper = AutoMapperConfig.GetMapper();
+            catalogue = new CatalogueService();
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            CatalogueService catalogue = new CatalogueService();
-            catalogue.GetAllProductsAsync();
+            var productDTO = await catalogue.GetDiscountProducts();
+            var productViewModel = mapper.Map<List<ProductViewModel>>(productDTO);
             return View();
         }
 

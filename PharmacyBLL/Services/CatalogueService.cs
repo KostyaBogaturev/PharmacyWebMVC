@@ -42,20 +42,24 @@ namespace PharmacyBLL.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ProductDTO> GetDiscountProducts()
+        public async Task<IEnumerable<ProductDTO>> GetDiscountProducts()
         {
-            throw new NotImplementedException();
+            DiscountService discount = new DiscountService();
+
+            var result = await discount.GetDiscountProductsAsync();
+
+            return result;
         }
 
-        public async Task<IEnumerable<ProductDTO>> GetFilteredProductsAsync(List<string> firms, bool inStockOnly=false)
+        public async Task<IEnumerable<ProductDTO>> GetFilteredProductsAsync(List<string> firms, bool inStockOnly = false)
         {
             var products = await GetAllProductsAsync();
 
-            if(inStockOnly)
-            products = products.Where(p => p.Count > 0);
+            if (inStockOnly)
+                products = products.Where(p => p.Count > 0);
 
             var result = new List<ProductDTO>();
-            if (products !=null & firms.Any())
+            if (products != null & firms.Any())
             {
                 foreach (var item in firms)
                 {
