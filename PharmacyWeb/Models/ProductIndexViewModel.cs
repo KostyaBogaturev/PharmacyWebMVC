@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PharmacyWeb.Enums;
+using System.Collections.Generic;
 
 namespace PharmacyWeb.Models
 {
@@ -11,5 +12,7 @@ namespace PharmacyWeb.Models
         public List<string> Firms { get; set; }
 
         public List<string> CheckedFirms { get; set; }
+
+        public SortParamaters SortState { get; set; }
     }
 }

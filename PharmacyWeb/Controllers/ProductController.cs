@@ -24,38 +24,41 @@ namespace PharmacyWeb.Controllers
             catalogueService = new CatalogueService();
         }
 
-        public async Task<IActionResult> Index(List<string> checkedFirms, int page = 1, SortParamaters sortParams = SortParamaters.NameAsc)
+        public async Task<IActionResult> Index(List<string> checkedFirms, int page = 1, SortParamaters sortState = SortParamaters.NameAsc)
         {
-            int pageSize = 9;
+            int pageSize = 2;
+            checkedFirms.ToList();
 
             IEnumerable<ProductDTO> productsDTO =
                 checkedFirms.Any() ?
                 await catalogueService.GetFilteredProductsAsync(checkedFirms) : await catalogueService.GetAllProductsAsync();
 
-            var products = mapper.Map<List<ProductViewModel>>(productsDTO);
+            List<ProductViewModel> products = mapper.Map<List<ProductViewModel>>(productsDTO);
 
-            var count = products.Count();
-            var items = products.Skip((page - 1) * pageSize).Take(pageSize);
-            items = sortParams switch
+            var idn = sortState switch
             {
-                SortParamaters.NameAsc => items.OrderBy(i => i.Name),
-                SortParamaters.NameDesc => items.OrderByDescending(i => i.Name),
-                SortParamaters.PriceAsc => items.OrderBy(i => i.Cost),
-                SortParamaters.PricaDesc => items.OrderByDescending(i => i.Cost),
-                _ => items.OrderBy(i => i.Name),
+                SortParamaters.NameAsc => products.OrderBy(i => i.Name),
+                SortParamaters.NameDesc => products.OrderByDescending(i => i.Name),
+                SortParamaters.PriceAsc => products.OrderBy(i => i.Cost),
+                SortParamaters.PricaDesc => products.OrderByDescending(i => i.Cost),
+                _ => products.OrderBy(i => i.Name),
             };
 
             // it's just temp realization of firm-list
             var firms = new List<string>() { "Bayer", "Nalfon", "Aleve" };
 
+            var count = idn.Count();
+            var items = idn.Skip((page - 1) * pageSize).Take(pageSize);
 
             var pageViewModel = new PageViewModel(count, page, pageSize);
+
             var productIndexViewModel = new ProductIndexViewModel()
             {
                 PageViewModel = pageViewModel,
                 Products = items,
                 Firms = firms,
-                CheckedFirms = checkedFirms
+                CheckedFirms = checkedFirms,
+                SortState = sortState
             };
 
             return View(productIndexViewModel);

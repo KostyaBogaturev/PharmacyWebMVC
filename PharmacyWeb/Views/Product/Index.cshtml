@@ -10,7 +10,7 @@
                     Sort by
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" asp-action="Index" asp-route-sortParams="@SortParamaters.NameAsc">A-Z</a>
+                    <a class="dropdown-item" asp-action="Index" asp-route-sortParams="@SortParamaters.NameAsc" asp-route-checkedFirms="@Model.Firms">A-Z</a>
                     <a class="dropdown-item" asp-action="Index" asp-route-sortParams="@SortParamaters.NameDesc">Z-A</a>
                     <a class="dropdown-item" asp-action="Index" asp-route-sortParams="@SortParamaters.PriceAsc">Ascending price</a>
                     <a class="dropdown-item" asp-action="Index" asp-route-sortParams="@SortParamaters.PricaDesc">Descending price</a>
@@ -20,7 +20,7 @@
                 @for (int i = 0; i < @Model.Firms.Count(); i++)
                 {
                     <div class="row form-check">
-                        <input class="form-check-input col-2" type="checkbox" name="checkedFirms" value="@Model.Firms[i]">
+                        <input class="form-check-input col-2" type="submit" asp-route-checkedFirms="@Model.Firms[i]">
                         <p class="col-10">@Model.Firms[i]</p>
                     </div>
                 }
