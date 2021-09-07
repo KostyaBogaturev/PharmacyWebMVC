@@ -14,7 +14,8 @@
             <div class="col-3">
                 <a asp-action="GetProduct" asp-route-id="@item.Id">
                     <img src="/Images/@item.Image" alt="Photo of Prouct" asp-append-version="true" />
-                    <p class="text-black-50">@item.Cost грн</p>
+                    <s class="text-secondary">@item.Cost грн</s>
+                    <p class="text-danger">@item.CostOnSale грн</p>
                     <p>@item.Name</p>
                 </a>
             </div>

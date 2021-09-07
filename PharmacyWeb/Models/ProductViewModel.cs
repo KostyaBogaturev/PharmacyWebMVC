@@ -23,6 +23,10 @@ namespace PharmacyWeb.Models
 
         public string Subtype { get; set; }
 
+        public bool IsOnsale { get; set; }
+
+        public double? CostOnSale { get; set; }
+
         public IEnumerable<PharmacyViewModel> Pharmacies { get; set; }
     }
 }
