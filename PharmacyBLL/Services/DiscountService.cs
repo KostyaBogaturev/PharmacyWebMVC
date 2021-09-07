@@ -1,7 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using AutoMapper;
 using PharmacyBLL.DTO;
+using PharmacyDAL;
+using PharmacyDAL.Entities;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,34 +10,30 @@ namespace PharmacyBLL.Services
 {
     public class DiscountService
     {
-        public async Task<IEnumerable<ProductDTO>> GetDiscountProductsAsync()
+        private UnitOfWork dataBase;
+        private IMapper mapper;
+
+        public DiscountService()
         {
-            IEnumerable<ProductDTO> products;
-
-            using (var sr = new StreamReader("../PharmacyBLL/DiscounteProducts.json"))
-            {
-                string json = await sr.ReadToEndAsync();
-                products = JsonConvert.DeserializeObject<List<ProductDTO>>(json);
-            }
-
-            return products;
+            dataBase = new UnitOfWork();
+            mapper = AutoMapperConfig.GetMapper();
         }
 
-        public async Task AddProductToDiscountAsync(ProductDTO product)
+        public async Task<IEnumerable<ProductDTO>> GetDiscountProductsAsync()
         {
-            var products = await GetDiscountProductsAsync();
+            var productsDAL = await dataBase.Products.GetAllAsync();
+            var products = mapper.Map<List<ProductDTO>>(productsDAL);
 
-            await Task.Run(() =>
-            {
-               List<ProductDTO> result = products == null ? new List<ProductDTO>() : products.ToList();
-               result.Add(product);
+            var result = products.Where(p => p.IsOnSale);
 
-               using (var sw = new StreamWriter("../PharmacyBLL/DiscounteProducts.json"))
-               {
-                   var serializer = new JsonSerializer();
-                   serializer.Serialize(sw, result);
-               }
-            });
+            return result;
+        }
+
+        public async Task AddProductToDiscountAsync(ProductDTO productDTO)
+        {
+            var product = mapper.Map<Product>(productDTO);
+
+            await dataBase.Products.UpdateAsync(product);
         }
 
 

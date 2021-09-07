@@ -19,6 +19,10 @@ namespace PharmacyBLL.DTO
 
         public bool NeedPrescription { get; set; }
 
+        public bool IsOnSale { get; set; }
+
+        public double? CostOnSale { get; set; }
+
         public Guid TypeId { get; set; }
 
         public SubtypeDTO Subtype { get; set; }
