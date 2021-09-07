@@ -9,10 +9,8 @@ namespace PharmacyWeb.Models
 
         public PageViewModel PageViewModel { get; set; }
 
-        public List<string> Firms { get; set; }
+        public FilterViewModel Filter { get; set; }
 
-        public string[] CheckedFirms { get; set; }
-
-        public SortParamaters SortState { get; set; }
+        public SortViewModel Sort { get; set; }
     }
 }

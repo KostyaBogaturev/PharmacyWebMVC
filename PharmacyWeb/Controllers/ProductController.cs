@@ -24,18 +24,24 @@ namespace PharmacyWeb.Controllers
             catalogueService = new CatalogueService();
         }
 
-        public async Task<IActionResult> Index(string[] checkedFirms=null, int page = 1, SortParamaters sortState = SortParamaters.NameAsc)
+        public async Task<IActionResult> Index(string firmFilter = "All", SortParamaters sortState = SortParamaters.NameAsc, int page = 1)
         {
-            int pageSize = 2;
-            checkedFirms.ToList();
+            int pageSize = 1;
+
+            // it's just temp realization of firm-list
+            var firms = new List<string>() { "Bayer", "Nalfon", "Aleve" };
+
+            var filter = new FilterViewModel(firms, firmFilter);
 
             IEnumerable<ProductDTO> productsDTO =
-                checkedFirms.Any() ?
-                await catalogueService.GetFilteredProductsAsync(checkedFirms) : await catalogueService.GetAllProductsAsync();
+                firmFilter!="All" ?
+                await catalogueService.GetFilteredProductsAsync(firmFilter) : await catalogueService.GetAllProductsAsync();
 
             List<ProductViewModel> products = mapper.Map<List<ProductViewModel>>(productsDTO);
 
-            var idn = sortState switch
+            var sort = new SortViewModel(sortState);
+
+            var sortedProducts = sort.SortState switch
             {
                 SortParamaters.NameAsc => products.OrderBy(i => i.Name),
                 SortParamaters.NameDesc => products.OrderByDescending(i => i.Name),
@@ -44,11 +50,8 @@ namespace PharmacyWeb.Controllers
                 _ => products.OrderBy(i => i.Name),
             };
 
-            // it's just temp realization of firm-list
-            var firms = new List<string>() { "Bayer", "Nalfon", "Aleve" };
-
-            var count = idn.Count();
-            var items = idn.Skip((page - 1) * pageSize).Take(pageSize);
+            var count = sortedProducts.Count();
+            var items = sortedProducts.Skip((page - 1) * pageSize).Take(pageSize);
 
             var pageViewModel = new PageViewModel(count, page, pageSize);
 
@@ -56,9 +59,8 @@ namespace PharmacyWeb.Controllers
             {
                 PageViewModel = pageViewModel,
                 Products = items,
-                Firms = firms,
-                CheckedFirms = checkedFirms,
-                SortState = sortState
+                Sort=sort,
+                Filter=filter
             };
 
             return View(productIndexViewModel);

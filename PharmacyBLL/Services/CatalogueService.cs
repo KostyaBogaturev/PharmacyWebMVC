@@ -51,25 +51,17 @@ namespace PharmacyBLL.Services
             return result;
         }
 
-        public async Task<IEnumerable<ProductDTO>> GetFilteredProductsAsync(string[] firms = null, bool inStockOnly = false)
+        public async Task<IEnumerable<ProductDTO>> GetFilteredProductsAsync(string firm = null, bool inStockOnly = false)
         {
             var products = await GetAllProductsAsync();
 
             if (inStockOnly)
                 products = products.Where(p => p.Count > 0);
 
-            var result = new List<ProductDTO>();
-            if (products != null & firms.Any())
-            {
-                foreach (var item in firms)
-                {
-                    var tempStorage = products.Where(p => p.Firm == item);
-                    if (tempStorage != null)
-                        result.AddRange(tempStorage);
-                }
-            }
+            if (!string.IsNullOrEmpty(firm))
+                products = products.Where(p => p.Firm == firm);
 
-            return result;
+            return products;
         }
     }
 }
