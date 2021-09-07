@@ -11,7 +11,7 @@ namespace PharmacyWeb.Models
 
         public List<string> Firms { get; set; }
 
-        public List<string> CheckedFirms { get; set; }
+        public string[] CheckedFirms { get; set; }
 
         public SortParamaters SortState { get; set; }
     }

@@ -24,7 +24,7 @@ namespace PharmacyWeb.Controllers
             catalogueService = new CatalogueService();
         }
 
-        public async Task<IActionResult> Index(List<string> checkedFirms, int page = 1, SortParamaters sortState = SortParamaters.NameAsc)
+        public async Task<IActionResult> Index(string[] checkedFirms=null, int page = 1, SortParamaters sortState = SortParamaters.NameAsc)
         {
             int pageSize = 2;
             checkedFirms.ToList();

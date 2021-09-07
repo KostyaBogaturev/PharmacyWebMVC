@@ -51,7 +51,7 @@ namespace PharmacyBLL.Services
             return result;
         }
 
-        public async Task<IEnumerable<ProductDTO>> GetFilteredProductsAsync(List<string> firms=null, bool inStockOnly = false)
+        public async Task<IEnumerable<ProductDTO>> GetFilteredProductsAsync(string[] firms = null, bool inStockOnly = false)
         {
             var products = await GetAllProductsAsync();
 

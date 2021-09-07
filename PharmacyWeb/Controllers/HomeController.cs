@@ -28,7 +28,7 @@ namespace PharmacyWeb.Controllers
         {
             var productDTO = await catalogue.GetDiscountProducts();
             var productViewModel = mapper.Map<List<ProductViewModel>>(productDTO);
-            return View();
+            return View(productViewModel);
         }
 
         public IActionResult Privacy()
