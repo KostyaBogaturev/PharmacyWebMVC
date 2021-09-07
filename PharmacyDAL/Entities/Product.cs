@@ -20,10 +20,14 @@ namespace PharmacyDAL.Entities
 
         public bool NeedPrescription { get; set; }
 
+        public bool IsOnSale { get; set; }
+
+        public double? CostOnSale { get; set; }
+
         public Guid TypeId { get; set; }
 
         [Required]
-        public ProductType Type { get; set; }
+        public Subtype Subtypeype { get; set; }
 
         public IEnumerable<Pharmacy> Pharmacies { get; set; }
 
