@@ -11,6 +11,7 @@ namespace PharmacyWeb
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<ProductDTO, ProductViewModel>()
+                .ForMember(view => view.Subtype, opt => opt.MapFrom(src => src.Subtype.Name))
                 .ForMember(view => view.Type, opt => opt.MapFrom(src => src.Subtype.Type.Name))
                 .ReverseMap();
             });

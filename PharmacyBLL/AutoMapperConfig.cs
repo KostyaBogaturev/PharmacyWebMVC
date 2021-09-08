@@ -13,6 +13,7 @@ namespace PharmacyBLL
                 cfg.CreateMap<Product, ProductDTO>()
                 .ForMember(dto => dto.Subtype, opt => opt.MapFrom(src => src.Subtypeype))
                 .ReverseMap();
+                cfg.CreateMap<Subtype, SubtypeDTO>();
                 cfg.CreateMap<Medicine, MedicineDTO>();
                 cfg.CreateMap<Beauty, BeautyDTO>();
                 cfg.CreateMap<ProductForChild, ProductForChildDTO>();

@@ -33,7 +33,7 @@ namespace PharmacyDAL.Repositories
         public async Task<Product> GetAsync(Guid id) => await _ctx.Products.FindAsync(id);
 
 
-        public async Task<IEnumerable<Product>> GetAllAsync() => await Task.Run(() => _ctx.Products);
+        public async Task<IEnumerable<Product>> GetAllAsync() => await Task.Run(() => _ctx.Products.Include(p=>p.Subtypeype).ThenInclude(s=>s.Type));
 
         public async Task UpdateAsync(Product item)
         {
