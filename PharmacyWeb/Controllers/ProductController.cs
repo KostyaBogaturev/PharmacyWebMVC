@@ -24,43 +24,30 @@ namespace PharmacyWeb.Controllers
             catalogueService = new CatalogueService();
         }
 
-        public async Task<IActionResult> Index(string firmFilter = "All", SortParamaters sortState = SortParamaters.NameAsc, int page = 1)
+        public async Task<IActionResult> Index(string type = "All", string subtype = "All", string firmFilter = "All", bool IsStockOnly=false, SortParamaters sortState = SortParamaters.NameAsc, int page = 1)
         {
-            int pageSize = 1;
-
             // it's just temp realization of firm-list
             var firms = new List<string>() { "Bayer", "Nalfon", "Aleve" };
 
             var filter = new FilterViewModel(firms, firmFilter);
 
-            IEnumerable<ProductDTO> productsDTO =
-                firmFilter!="All" ?
-                await catalogueService.GetFilteredProductsAsync(firmFilter) : await catalogueService.GetAllProductsAsync();
-
+            IEnumerable<ProductDTO> productsDTO = await catalogueService.GetFilteredProductsAsync(type, subtype, firmFilter, IsStockOnly);
             List<ProductViewModel> products = mapper.Map<List<ProductViewModel>>(productsDTO);
 
             var sort = new SortViewModel(sortState);
+            var sortedProducts = sort.SortProducts(products);
 
-            var sortedProducts = sort.SortState switch
-            {
-                SortParamaters.NameAsc => products.OrderBy(i => i.Name),
-                SortParamaters.NameDesc => products.OrderByDescending(i => i.Name),
-                SortParamaters.PriceAsc => products.OrderBy(i => i.Cost),
-                SortParamaters.PricaDesc => products.OrderByDescending(i => i.Cost),
-                _ => products.OrderBy(i => i.Name),
-            };
-
+            int pageSize = 9;
             var count = sortedProducts.Count();
             var items = sortedProducts.Skip((page - 1) * pageSize).Take(pageSize);
-
             var pageViewModel = new PageViewModel(count, page, pageSize);
 
             var productIndexViewModel = new ProductIndexViewModel()
             {
                 PageViewModel = pageViewModel,
                 Products = items,
-                Sort=sort,
-                Filter=filter
+                Sort = sort,
+                Filter = filter
             };
 
             return View(productIndexViewModel);

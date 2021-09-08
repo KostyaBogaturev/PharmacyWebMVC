@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using PharmacyWeb.Enums;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PharmacyWeb.Models
 {
@@ -21,6 +22,20 @@ namespace PharmacyWeb.Models
             };
             SortStates = new SelectList(list, sortState);
 
+        }
+
+        public List<ProductViewModel> SortProducts(IEnumerable<ProductViewModel> products)
+        {
+            var sortedProducts = SortState switch
+            {
+                SortParamaters.NameAsc => products.OrderBy(i => i.Name),
+                SortParamaters.NameDesc => products.OrderByDescending(i => i.Name),
+                SortParamaters.PriceAsc => products.OrderBy(i => i.Cost),
+                SortParamaters.PricaDesc => products.OrderByDescending(i => i.Cost),
+                _ => products.OrderBy(i => i.Name),
+            };
+
+            return sortedProducts.ToList();
         }
     }
 }

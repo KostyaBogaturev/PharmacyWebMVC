@@ -43,15 +43,15 @@ namespace PharmacyBLL.Services
             var products = await GetAllProductsAsync();
 
             if (inStockOnly)
-                products= filter.FilterByAvailability(products, inStockOnly);
+                products = filter.FilterByAvailability(products, inStockOnly);
 
-            if (!string.IsNullOrEmpty(type))
+            if (!string.IsNullOrEmpty(type) && type != "All")
                 products = filter.FilterByType(products, type);
 
-            if (!string.IsNullOrEmpty(subtype))
+            if (!string.IsNullOrEmpty(subtype) && subtype != "All")
                 products = filter.FilterBySubtype(products, subtype);
 
-            if (!string.IsNullOrEmpty(firm))
+            if (!string.IsNullOrEmpty(firm) && firm != "All")
                 products = filter.FilterByFirm(products, firm);
 
             return products;
