@@ -29,21 +29,6 @@ namespace PharmacyBLL.Services
             return products;
         }
 
-        public IEnumerable<BeautyDTO> GetBeauties()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<MedicineDTO> GetMedicines()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<ProductForChildDTO> GetProductsForChildren()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<ProductDTO>> GetDiscountProducts()
         {
             DiscountService discount = new DiscountService();
