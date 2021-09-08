@@ -26,10 +26,12 @@ namespace PharmacyWeb.Controllers
 
         public async Task<IActionResult> Index(string type = "All", string subtype = "All", string firmFilter = "All", bool IsStockOnly=false, SortParamaters sortState = SortParamaters.NameAsc, int page = 1)
         {
-            // it's just temp realization of firm-list
+            // it's just temp realization of lists of item
             var firms = new List<string>() { "Bayer", "Nalfon", "Aleve" };
+            var types = new List<string>() { "Bayer", "Nalfon", "Aleve" };
+            var subtypes = new List<string>() { "Bayer", "Nalfon", "Aleve" };
 
-            var filter = new FilterViewModel(firms, firmFilter);
+            var filter = new FilterViewModel(firms,types,subtypes, firmFilter,type,subtype);
 
             IEnumerable<ProductDTO> productsDTO = await catalogueService.GetFilteredProductsAsync(type, subtype, firmFilter, IsStockOnly);
             List<ProductViewModel> products = mapper.Map<List<ProductViewModel>>(productsDTO);
