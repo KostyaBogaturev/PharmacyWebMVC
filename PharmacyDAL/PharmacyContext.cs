@@ -28,6 +28,8 @@ namespace PharmacyDAL
         public PharmacyContext()
         {
             Database.EnsureCreated();
+
+            var antivirusal = Subtypes.Where(s => s.Name == "Antiviral").First();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -39,7 +41,7 @@ namespace PharmacyDAL
         {
             modelBuilder.Entity<Subtype>()
                 .HasOne(s => s.Type);
-                
+
         }
     }
 }

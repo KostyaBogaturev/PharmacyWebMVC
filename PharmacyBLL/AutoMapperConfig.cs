@@ -10,7 +10,9 @@ namespace PharmacyBLL
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Product, ProductDTO>().ReverseMap();
+                cfg.CreateMap<Product, ProductDTO>()
+                .ForMember("Subtype" , opt=>opt.MapFrom(src=>src.Subtypeype))
+                .ReverseMap();
                 cfg.CreateMap<Medicine, MedicineDTO>();
                 cfg.CreateMap<Beauty, BeautyDTO>();
                 cfg.CreateMap<ProductForChild, ProductForChildDTO>();
