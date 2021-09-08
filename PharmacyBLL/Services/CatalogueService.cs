@@ -13,11 +13,13 @@ namespace PharmacyBLL.Services
     {
         private IMapper mapper;
         private UnitOfWork dataBase;
+        private FiltrationService filter;
 
         public CatalogueService()
         {
             mapper = AutoMapperConfig.GetMapper();
             dataBase = new UnitOfWork();
+            filter = new FiltrationService();
         }
 
         public async Task<IEnumerable<ProductDTO>> GetAllProductsAsync()
@@ -51,15 +53,21 @@ namespace PharmacyBLL.Services
             return result;
         }
 
-        public async Task<IEnumerable<ProductDTO>> GetFilteredProductsAsync(string firm = null, bool inStockOnly = false)
+        public async Task<IEnumerable<ProductDTO>> GetFilteredProductsAsync(string type = null, string subtype = null, string firm = null, bool inStockOnly = false)
         {
             var products = await GetAllProductsAsync();
 
             if (inStockOnly)
-                products = products.Where(p => p.Count > 0);
+                products= filter.FilterByAvailability(products, inStockOnly);
+
+            if (!string.IsNullOrEmpty(type))
+                products = filter.FilterByType(products, type);
+
+            if (!string.IsNullOrEmpty(subtype))
+                products = filter.FilterBySubtype(products, subtype);
 
             if (!string.IsNullOrEmpty(firm))
-                products = products.Where(p => p.Firm == firm);
+                products = filter.FilterByFirm(products, firm);
 
             return products;
         }
