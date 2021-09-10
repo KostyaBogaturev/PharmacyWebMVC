@@ -42,7 +42,7 @@
                     <p class="text-black-50">@item.Cost грн</p>
                     <p>@item.Name</p>
                 </a>
-                <a asp-action="UpdateProduct" asp-route-id="@item.Id" class="btn btn-outline-dark">Update</a>
+                <a asp-controller="Order" asp-action="AddToOrder" asp-route-key="orderId" asp-route-productId="@item.Id" class="btn btn-outline-dark">AddToOrder</a>
                 <hr />
             </div>
         }
@@ -70,4 +70,6 @@
             <i class="glyphicon glyphicon-chevron-right"></i>
         </a>
     }
+
+    <a asp-controller="Order" asp-action="Index" asp-route-key="orderId">Order</a>
 </div>

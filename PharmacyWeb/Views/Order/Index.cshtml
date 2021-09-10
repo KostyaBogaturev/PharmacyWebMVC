@@ -1,0 +1,10 @@
+﻿@model List<ProductViewModel>
+
+@foreach (var item in Model)
+{
+    <img src="/Images/@item.Image" alt="Photo of Prouct" asp-append-version="true" />
+    <p class="text-black-50">@item.Cost грн</p>
+    <p>@item.Name</p>
+}
+
+<a asp-action="MakeOrder" class="btn-block btn-dark">Make Order</a>
