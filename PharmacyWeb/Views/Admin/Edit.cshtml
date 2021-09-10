@@ -1,0 +1,37 @@
+﻿@model ProductViewModel
+
+<h2>Create product</h2>
+<form asp-controller="Admin" asp-action="Edit">
+    <div>
+        <label asp-for="Name"></label>
+        <input type="text" asp-for="Name" required value="@Model.Name" />
+    </div>
+
+    <div>
+        <label asp-for="Firm"></label>
+        <input type="text" asp-for="Firm" required value="@Model.Firm" />
+    </div>
+
+    <div>
+        <label asp-for="Cost"></label>
+        <input type="number" asp-for="Cost" required value="@Model.Cost" />
+    </div>
+
+    <div>
+        <label asp-for="Count"></label>
+        <input type="number" asp-for="Count" required value="@Model.Count" />
+    </div>
+
+    <div>
+        <label asp-for="Image"></label>
+        <input type="text" accept=".jpg" asp-for="Image"  value="@Model.Image" />
+    </div>
+
+    <input asp-for="Id" name="Id" value="@Model.Id" hidden />
+    <input asp-for="Subtype" name="Subtype" value="@Model.Subtype" hidden />
+
+    <div>
+        <input type="submit" value="Create" class="btn" />
+    </div>
+
+</form>

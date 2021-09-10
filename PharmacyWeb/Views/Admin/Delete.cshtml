@@ -1,0 +1,12 @@
+﻿@model ProductViewModel
+
+<img src="/Images/@Model.Image" alt="Photo of Prouct" asp-append-version="true" />
+<p class="text-black-50">@Model.Cost грн</p>
+<p>@Model.Name</p>
+
+<form asp-controller="Admin" asp-action="Delete">
+    <input asp-for="Id" name="Id" value="@Model.Id" hidden />
+    <input asp-for="Subtype" name="Subtype" value="@Model.Subtype" hidden />
+    <input type="submit" value="Delete" class="btn-danger" />
+</form>
+

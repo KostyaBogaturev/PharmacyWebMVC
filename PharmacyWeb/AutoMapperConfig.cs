@@ -12,8 +12,9 @@ namespace PharmacyWeb
             {
                 cfg.CreateMap<ProductDTO, ProductViewModel>()
                 .ForMember(view => view.Subtype, opt => opt.MapFrom(src => src.Subtype.Name))
-                .ForMember(view => view.Type, opt => opt.MapFrom(src => src.Subtype.Type.Name))
-                .ReverseMap();
+                .ForMember(view => view.Type, opt => opt.MapFrom(src => src.Subtype.Type.Name));
+
+                cfg.CreateMap<ProductViewModel, ProductDTO>();
             });
 
             IMapper mapper = config.CreateMapper();

@@ -56,5 +56,38 @@ namespace PharmacyBLL.Services
 
             return products;
         }
+
+        public async Task<List<string>> GetAllFirmsAsync()
+        {
+            var products = await GetAllProductsAsync();
+            var firms = products.Select(p => p.Firm).Distinct().ToList();
+
+            return firms;
+        }
+
+        public async Task<List<string>> GetAllTypesNameAsync()
+        {
+            var products = await GetAllProductsAsync();
+            var typesName = products.Select(p => p.Subtype.Type.Name).Distinct().ToList();
+
+            return typesName;
+        }
+
+        public async Task<List<string>> GetAllSubtypesNameAsync()
+        {
+            var products = await GetAllProductsAsync();
+            var subtypesName = products.Select(p => p.Subtype.Name).Distinct().ToList();
+
+            return subtypesName;
+        }
+
+        public async Task<ProductDTO> GetProductAsync(Guid Id)
+        {
+            var product = await dataBase.Products.GetAsync(Id);
+            var result = mapper.Map<ProductDTO>(product);
+
+            return result;
+        }
+
     }
 }

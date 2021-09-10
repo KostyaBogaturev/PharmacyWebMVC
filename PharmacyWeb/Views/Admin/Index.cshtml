@@ -1,0 +1,18 @@
+﻿@model List<ProductViewModel>;
+
+<div class="row">
+    @if (Model != null)
+        @foreach (var item in Model)
+        {
+            <div class="col-4">
+                <a asp-action="GetProduct" asp-route-id="@item.Id">
+                    <img src="/Images/@item.Image" alt="Photo of Prouct" asp-append-version="true" />
+                    <p class="text-black-50">@item.Cost грн</p>
+                    <p>@item.Name</p>
+                </a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-dark">Update</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Delete</a>
+                <hr />
+            </div>
+        }
+</div>

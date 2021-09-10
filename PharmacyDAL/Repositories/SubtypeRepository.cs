@@ -1,4 +1,5 @@
-﻿using PharmacyDAL.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using PharmacyDAL.Contracts;
 using PharmacyDAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace PharmacyDAL.Repositories
         public async Task<Subtype> GetAsync(Guid id) => await _ctx.Subtypes.FindAsync(id);
 
 
-        public async Task<IEnumerable<Subtype>> GetAllAsync() => await Task.Run(() => _ctx.Subtypes);
+        public async Task<IEnumerable<Subtype>> GetAllAsync() => await Task.Run(() => _ctx.Subtypes.Include(s=>s.Type));
 
 
         public async Task UpdateAsync(Subtype item)

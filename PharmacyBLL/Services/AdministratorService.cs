@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 
 namespace PharmacyBLL.Services
 {
-    public class AdministratorService<T> : IAdministrator<T>
-        where T : class
+    public class AdministratorService : IAdministrator
     {
         private UnitOfWork DataBase { get; set; }
         private IMapper mapper = AutoMapperConfig.GetMapper();
@@ -21,129 +20,29 @@ namespace PharmacyBLL.Services
             DataBase = new UnitOfWork();
         }
 
-        private static List<ProductDTO> FilterProducts(List<ProductDTO> products, List<string> firms)
+        public async Task<IEnumerable<ProductDTO>> GetProductsAsync()
         {
-            if (products!=null && firms.Any())
-            {
-                var result = new List<ProductDTO>();
-                foreach (var item in firms)
-                {
-                    var tempStorage = products.Where(p => p.Firm == item);
-                    if (tempStorage != null)
-                        result.AddRange(tempStorage);
-                }
-                return result;
-            }
-            return products;
+            var products = await DataBase.Products.GetAllAsync();
+            var result = mapper.Map<List<ProductDTO>>(products);
+
+            return result;
         }
 
-        public async Task<IEnumerable<T>> GetItemsAsync(List<string> firms=null)
+        public async Task EditAsync(ProductDTO productDTO)
         {
-            if (typeof(T) == typeof(ProductDTO))
-            {
-                IEnumerable<Product> productsDB = await DataBase.Products.GetAllAsync();
-                List<ProductDTO> result = mapper.Map<List<ProductDTO>>(productsDB);
-                result = FilterProducts(result, firms);
-                return result as IEnumerable<T>;
-            }
-            else if (typeof(T) == typeof(PharmacyDTO))
-            {
-                IEnumerable<Pharmacy> pharmasiesDB = await DataBase.Pharmacies.GetAllAsync();
-                List<PharmacyDTO> result = mapper.Map<List<PharmacyDTO>>(pharmasiesDB);
-                return result as IEnumerable<T>;
-            }
-            else if (typeof(T) == typeof(ProductTypeDTO))
-            {
-                IEnumerable<ProductType> types = await DataBase.Types.GetAllAsync();
-                List<ProductTypeDTO> result = mapper.Map<List<ProductTypeDTO>>(types);
-                return result as IEnumerable<T>;
-            }
-            throw new Exception("inappropriate data type");
-        }
-
-
-        public async Task<T> GetItemAsync(Guid id)
-        {
-            if (typeof(T) == typeof(ProductDTO))
-            {
-                Product product = await DataBase.Products.GetAsync(id);
-                ProductDTO result = mapper.Map<ProductDTO>(product);
-                return result as T;
-            }
-            else if (typeof(T) == typeof(PharmacyDTO))
-            {
-                Pharmacy pharmasy = await DataBase.Pharmacies.GetAsync(id);
-                PharmacyDTO result = mapper.Map<PharmacyDTO>(pharmasy);
-                return result as T;
-            }
-            else if (typeof(T) == typeof(ProductTypeDTO))
-            {
-                ProductType type = await DataBase.Types.GetAsync(id);
-                ProductTypeDTO result = mapper.Map<ProductTypeDTO>(type);
-                return result as T;
-            }
-            throw new Exception("inappropriate data type");
-        }
-
-        public async Task UpdateAsync(T item)
-        {
-            if (typeof(T) == typeof(ProductDTO))
-            {
-                Product result = mapper.Map<ProductDTO, Product>(item as ProductDTO);
-                await DataBase.Products.UpdateAsync(result);
-            }
-            else if (typeof(T) == typeof(PharmacyDTO))
-            {
-                Pharmacy result = mapper.Map<Pharmacy>(item as PharmacyDTO);
-                await DataBase.Pharmacies.UpdateAsync(result);
-            }
-            else if (typeof(T) == typeof(ProductTypeDTO))
-            {
-                ProductType result = mapper.Map<ProductType>(item as ProductTypeDTO);
-                await DataBase.Types.UpdateAsync(result);
-            }
-            else
-                throw new Exception("inappropriate data type");
-        }
-
-        public async Task CreateAsync(T item)
-        {
-            Type t = typeof(T);
-            if (typeof(T) == typeof(ProductDTO))
-            {
-                Product result = mapper.Map<Product>(item as ProductDTO);
-                await DataBase.Products.CreateAsync(result);
-            }
-            else if (typeof(T) == typeof(PharmacyDTO))
-            {
-                Pharmacy result = mapper.Map<Pharmacy>(item as PharmacyDTO);
-                await DataBase.Pharmacies.CreateAsync(result);
-            }
-            else if (typeof(T) == typeof(ProductTypeDTO))
-            {
-                ProductType result = mapper.Map<ProductType>(item as ProductTypeDTO);
-                await DataBase.Types.CreateAsync(result);
-            }
-            else
-                throw new Exception("inappropriate data type");
+            var product = mapper.Map<Product>(productDTO);
+            await DataBase.Products.UpdateAsync(product);
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            if (typeof(T) == typeof(ProductDTO))
-            {
-                await DataBase.Products.DeleteAsync(id);
-            }
-            else if (typeof(T) == typeof(PharmacyDTO))
-            {
-                await DataBase.Pharmacies.DeleteAsync(id);
-            }
-            else if (typeof(T) == typeof(ProductTypeDTO))
-            {
-                await DataBase.Types.DeleteAsync(id);
-            }
-            else
-                throw new Exception("inappropriate data type");
+            await DataBase.Products.DeleteAsync(id);
+        }
+
+        public async Task CreateAsync(ProductDTO productDTO)
+        {
+            var product = mapper.Map<Product>(productDTO);
+            await DataBase.Products.CreateAsync(product);
         }
     }
 }

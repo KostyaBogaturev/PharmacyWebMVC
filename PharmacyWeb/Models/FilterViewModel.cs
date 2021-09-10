@@ -24,11 +24,11 @@ namespace PharmacyWeb.Models
             SelectedFirm = selectedFirm;
 
             types.Insert(0, "All");
-            Subtypes = new SelectList(types, selectedType);
+            Types = new SelectList(types, selectedType);
             SelectedType = selectedType;
 
             subtypes.Insert(0, "All");
-            Firms = new SelectList(subtypes, selectedSubtype);
+            Subtypes = new SelectList(subtypes, selectedSubtype);
             SelectedSubtype = selectedSubtype;
 
 

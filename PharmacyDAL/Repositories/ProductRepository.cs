@@ -27,7 +27,10 @@ namespace PharmacyDAL.Repositories
         {
             Product product = await GetAsync(id);
             if (product != null)
-                await Task.Run(() => _ctx.Products.Remove(product));
+            {
+                _ctx.Products.Remove(product);
+                await _ctx.SaveChangesAsync();
+            }
         }
 
         public async Task<Product> GetAsync(Guid id) => await _ctx.Products.FindAsync(id);

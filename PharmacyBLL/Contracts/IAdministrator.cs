@@ -1,16 +1,15 @@
-﻿using System;
+﻿using PharmacyBLL.DTO;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PharmacyBLL.Contracts
 {
-    public interface IAdministrator<T>
+    public interface IAdministrator
     {
-        Task<IEnumerable<T>> GetItemsAsync(List<string> firms);
-        Task<T> GetItemAsync(Guid id);
-        Task UpdateAsync(T item);
-        Task CreateAsync(T item);
+        Task<IEnumerable<ProductDTO>> GetProductsAsync();
+        Task EditAsync(ProductDTO productDTO);
         Task DeleteAsync(Guid id);
-
+        Task CreateAsync(ProductDTO productDTO);
     }
 }
