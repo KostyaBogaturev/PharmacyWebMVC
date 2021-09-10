@@ -39,8 +39,13 @@ namespace PharmacyBLL.Services
             await DataBase.Products.DeleteAsync(id);
         }
 
-        public async Task CreateAsync(ProductDTO productDTO)
+        public async Task CreateAsync(ProductDTO productDTO, string subtypeName)
         {
+            var subtypes = await DataBase.Subtypes.GetAllAsync();
+            var subtype = subtypes.Where(s => s.Name == subtypeName).First();
+            var subtypeDTO = mapper.Map<SubtypeDTO>(subtype);
+            productDTO.Subtype = subtypeDTO;
+            productDTO.TypeId = subtypeDTO.Id;
             var product = mapper.Map<Product>(productDTO);
             await DataBase.Products.CreateAsync(product);
         }

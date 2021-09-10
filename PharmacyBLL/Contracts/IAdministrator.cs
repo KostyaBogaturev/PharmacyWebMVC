@@ -10,6 +10,6 @@ namespace PharmacyBLL.Contracts
         Task<IEnumerable<ProductDTO>> GetProductsAsync();
         Task EditAsync(ProductDTO productDTO);
         Task DeleteAsync(Guid id);
-        Task CreateAsync(ProductDTO productDTO);
+        Task CreateAsync(ProductDTO productDTO, string subtypeName);
     }
 }

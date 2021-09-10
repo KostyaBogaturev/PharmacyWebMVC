@@ -46,11 +46,8 @@ namespace PharmacyWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ProductViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                var result = mapper.Map<ProductDTO>(model);
-                await adminService.CreateAsync(result);
-            }
+            var result = mapper.Map<ProductDTO>(model);
+            await adminService.CreateAsync(result, model.Subtype);
             return View("Index");
         }
 
